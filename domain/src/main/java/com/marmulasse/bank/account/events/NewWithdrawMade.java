@@ -1,6 +1,5 @@
 package com.marmulasse.bank.account.events;
 
-import com.marmulasse.bank.account.aggregate.Account;
 import com.marmulasse.bank.account.aggregate.AccountId;
 import com.marmulasse.bank.account.aggregate.Amount;
 
@@ -17,19 +16,8 @@ public class NewWithdrawMade implements AccountEvent {
         return amount;
     }
 
-    @Override
     public AccountId getAccountId() {
         return accountId;
-    }
-
-    @Override
-    public String getName() {
-        return "NewWithdrawMade";
-    }
-
-    @Override
-    public void apply(Account account) {
-        account.apply(this);
     }
 
     @Override

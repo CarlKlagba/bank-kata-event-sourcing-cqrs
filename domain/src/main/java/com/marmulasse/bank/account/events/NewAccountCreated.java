@@ -1,6 +1,5 @@
 package com.marmulasse.bank.account.events;
 
-import com.marmulasse.bank.account.aggregate.Account;
 import com.marmulasse.bank.account.aggregate.AccountId;
 
 public class NewAccountCreated implements AccountEvent {
@@ -13,19 +12,8 @@ public class NewAccountCreated implements AccountEvent {
         this.accountId = accountId;
     }
 
-    @Override
     public AccountId getAccountId() {
         return accountId;
-    }
-
-    @Override
-    public String getName() {
-        return "NewAccountCreated";
-    }
-
-    @Override
-    public void apply(Account account) {
-        account.apply(this);
     }
 
     @Override

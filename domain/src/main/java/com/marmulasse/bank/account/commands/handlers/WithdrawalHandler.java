@@ -1,4 +1,4 @@
-package com.marmulasse.bank.account;
+package com.marmulasse.bank.account.commands.handlers;
 
 import com.marmulasse.bank.account.aggregate.Account;
 import com.marmulasse.bank.account.aggregate.AccountId;
