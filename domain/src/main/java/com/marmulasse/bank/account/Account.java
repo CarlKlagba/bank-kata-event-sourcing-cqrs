@@ -1,14 +1,17 @@
 package com.marmulasse.bank.account;
 
 import com.google.common.base.Preconditions;
-
-import java.util.Objects;
 import com.marmulasse.bank.account.events.AccountEvent;
+import com.marmulasse.bank.account.events.NewAccountCreated;
+
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class Account {
     private AccountId accountId;
     private Balance balance;
+    protected List<AccountEvent> uncommittedChanged = new ArrayList<>();
 
     public static Account empty() {
         return new Account(AccountId.create(), Balance.ZERO);
@@ -19,8 +22,9 @@ public class Account {
     }
 
     private Account(AccountId accountId, Balance balance) {
-        this.accountId = accountId;
-        this.balance = balance;
+        NewAccountCreated newAccountCreated = new NewAccountCreated(accountId, balance);
+        apply(newAccountCreated);
+        saveUncommittedChange(newAccountCreated);
     }
 
     public void deposit(Amount amount) {
@@ -28,8 +32,21 @@ public class Account {
         this.balance = this.balance.add(amount);
     }
 
+    private void apply(NewAccountCreated newAccountCreated) {
+        this.accountId = newAccountCreated.getAccountId();
+        this.balance = newAccountCreated.getBalance();
+    }
+
+    private void saveUncommittedChange(AccountEvent accountEvent) {
+        this.uncommittedChanged.add(accountEvent);
+    }
+
     public Balance getBalance() {
         return balance;
+    }
+
+    public AccountId getAccountId() {
+        return accountId;
     }
 
     @Override
@@ -55,6 +72,6 @@ public class Account {
     }
 
     public List<AccountEvent> getUncommittedChanged() {
-        return null;
+        return uncommittedChanged;
     }
 }
