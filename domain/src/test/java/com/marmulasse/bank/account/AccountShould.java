@@ -25,7 +25,7 @@ public class AccountShould {
     @Test
     public void add_creation_event_when_creating_account() throws Exception {
         Account account = Account.empty();
-        assertThat(account.getUncommittedChanges()).containsOnly(new NewAccountCreated(Balance.ZERO));
+        assertThat(account.getUncommittedChanges()).containsOnly(new NewAccountCreated(account.getAccountId(), Balance.ZERO));
     }
 
     @Test
