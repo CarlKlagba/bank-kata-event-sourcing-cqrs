@@ -3,6 +3,8 @@ package com.marmulasse.bank.account;
 import com.google.common.base.Preconditions;
 
 import java.util.Objects;
+import com.marmulasse.bank.account.events.AccountEvent;
+import java.util.List;
 
 public class Account {
     private AccountId accountId;
@@ -50,5 +52,9 @@ public class Account {
                 "accountId=" + accountId +
                 ", balance=" + balance +
                 '}';
+    }
+
+    public List<AccountEvent> getUncommittedChanges() {
+        return null;
     }
 }
