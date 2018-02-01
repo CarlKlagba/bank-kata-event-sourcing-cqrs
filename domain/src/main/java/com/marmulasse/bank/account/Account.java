@@ -8,18 +8,6 @@ import com.marmulasse.bank.account.events.NewDepositMade;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import com.marmulasse.bank.account.events.AccountEvent;
-import com.marmulasse.bank.account.events.NewAccountCreated;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
-import com.marmulasse.bank.account.events.AccountEvent;
-import com.marmulasse.bank.account.events.NewAccountCreated;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
 
 public class Account {
     private AccountId accountId;
@@ -32,6 +20,10 @@ public class Account {
 
     public static Account with(Balance balance) {
         return new Account(AccountId.create(), balance);
+    }
+
+    public static Account rebuild(List<AccountEvent> events) {
+        return null;
     }
 
     private Account(AccountId accountId, Balance balance) {
